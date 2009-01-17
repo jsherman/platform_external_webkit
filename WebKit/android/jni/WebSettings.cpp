@@ -48,6 +48,7 @@
 
 namespace WebCore {
 // Defined in FileSystemAndroid.cpp
+extern bool ad_block_enabled;
 extern String sPluginPath;
 }
 
@@ -256,6 +257,13 @@ public:
         s->setDefaultFixedFontSize(size);
 
         jboolean flag = env->GetBooleanField(obj, gFieldIds->mLoadsImagesAutomatically);
+        /*
+         * HACK: "Load Images" now means "Block Ads", since changing the WebSettings
+         * object's signature would break framework binary compatibility.  Besides,
+         * who blocks all images?
+         */
+        WebCore::ad_block_enabled = flag;
+        flag = true;
         s->setLoadsImagesAutomatically(flag);
         if (flag)
             docLoader->setAutoLoadImages(true);

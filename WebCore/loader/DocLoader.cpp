@@ -152,8 +152,10 @@ CachedXBLDocument* DocLoader::requestXBLDocument(const String& url)
 }
 #endif
 
+bool shouldBlock(const KURL& url, int type);
 bool DocLoader::canRequest(CachedResource::Type type, const KURL& url)
 {
+    if (shouldBlock(url, type)) { return false; }
     // Some types of resources can be loaded only from the same origin.  Other
     // types of resources, like Images, Scripts, and CSS, can be loaded from
     // any URL.

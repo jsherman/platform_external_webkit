@@ -469,6 +469,7 @@ LOCAL_SRC_FILES := \
 	html/PreloadScanner.cpp \
 	html/TimeRanges.cpp \
 	\
+	loader/AdBlock.cpp \
 	loader/Cache.cpp \
 	loader/CachedCSSStyleSheet.cpp \
 	loader/CachedFont.cpp \

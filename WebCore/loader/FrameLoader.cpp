@@ -2361,9 +2361,10 @@ void FrameLoader::loadWithDocumentLoader(DocumentLoader* loader, FrameLoadType t
             callContinueLoadAfterNavigationPolicy, this);
     }
 }
-
+bool shouldBlock(const KURL& url, int type);
 bool FrameLoader::canLoad(const KURL& url, const String& referrer, const Document* doc)
 {
+    if (shouldBlock(url, -1)) { return false; }
     // We can always load any URL that isn't considered local (e.g. http URLs)
     if (!shouldTreatURLAsLocal(url.string()))
         return true;
